@@ -14,14 +14,15 @@ export default class News extends Component {
     category:PropTypes.string
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       article: [],
       pageNo: 1,
       totalResult: 0,
       loading:false
     }
+    document.title = `${this.props.category}-HackerNews`;
   }
   async fetchNews() {
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=e4e5f37fd94a49df8d9b8c29b27ee37b&page=${this.state.pageNo}&pageSize=${this.props.pageSize}`;
@@ -45,7 +46,7 @@ export default class News extends Component {
     
     return (
       <div className='container'>
-        <h2 className='text-center'>HackerNews-Headlines</h2>
+        <h2 className='text-center mt-2'>HackerNews-Top {this.props.category} Headlines</h2>
         <div className='d-flex justify-content-center align-items-center'>
           {this.state.loading && <Spinner/>}
         </div>
